@@ -168,7 +168,7 @@ const editInventario= async () => {
               </thead>
               <tbody>
                 {
-                  inventarios.map((inventario, index) => {
+                  inventarios.map((inventario, index,populate) => {
                     return (
                       <tr key={inventario._id}>
                         <th scope="row">{index + 1}</th>
@@ -178,10 +178,10 @@ const editInventario= async () => {
                         <td>{inventario.color}</td>
                         <td>{dayjs(inventario.fechaCompra).format('YYYY-MM-DD')}</td>
                         <td>{inventario.precio}</td>
-                        <td>{inventario.usuario}</td>
-                        <td>{inventario.marca}</td>
-                        <td>{inventario.estado ? 'Activo' : 'Inactivo'}</td>
-                        <td>{inventario.tipoEquipo}</td>
+                        <td>{populate.usuario}</td>
+                        <td>{populate.marca}</td>
+                        <td>{populate.estado }</td>
+                        <td>{populate.tipoEquipo}</td>
                        
                        
                         <td>{dayjs(inventario.fechaCreacion).format('YYYY-MM-DD')}</td>

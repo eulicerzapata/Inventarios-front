@@ -1,7 +1,7 @@
 import { axiosConfig } from "../configurations/axiosConfig";
 
 const getInventarios = (estado) => {
-  return axiosConfig.get("inventario?estado=" + estado, {
+  return axiosConfig.get("inventario" , {
     headers: {
       "Content-Type": "application/json",
     },

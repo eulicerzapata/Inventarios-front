@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { createInventarios, getInventarios, editarInventarios  } from '../services/InventarioServices'
-import { getUsuarios } from '../services/UsusariosService'
+import ModalAgregar from './ui/modalesInventarios.js/ModalAgregar'
+import ModalEditar from './ui/modalesInventarios.js/ModalEditar'
 
 
 export default function Inventarios() {
@@ -58,7 +59,18 @@ const saveInventario = async () => {
     setLoadingSave(true)
     const response = await createInventarios(inventario)
     console.log(response)
-    setinventario({nombre: ''})
+    setinventario({serial: ''})
+    setinventario({modelo: ''})
+    setinventario({foto: ''})
+    setinventario({color: ''})
+    setinventario({fechaCompra: ''})
+    setinventario({precio: ''})
+    setinventario({usuario: ''})
+    setinventario({marca: ''})
+    setinventario({estado: ''})
+    setinventario({tipoEquipo: ''})
+    
+
     listInventarios()
     setTimeout(() => {
       setLoadingSave(false)
@@ -71,7 +83,18 @@ const saveInventario = async () => {
 }
 
 const closeModal = () => {
-  setinventario({nombre: ''})
+  setinventario({serial: ''})
+    setinventario({modelo: ''})
+    setinventario({foto: ''})
+    setinventario({color: ''})
+    setinventario({fechaCompra: ''})
+    setinventario({precio: ''})
+    setinventario({usuario: ''})
+    setinventario({marca: ''})
+    setinventario({estado: ''})
+    setinventario({tipoEquipo: ''})
+    setinventario({fechaCompra: ''})
+    setinventario({fechaActualizacion: ''})
   if(id)setId('')
 }
 
@@ -88,7 +111,13 @@ const editInventario= async () => {
     setLoadingSave(true)
     const response = await editarInventarios(id, inventario)
     console.log(response)
-    setinventario({nombre: ''})
+    setinventario({serial: ''})
+    setinventario({modelo: ''})
+    setinventario({foto: ''})
+    setinventario({color: ''})
+    setinventario({fechaCompra: ''})
+    setinventario({precio: ''})
+    setinventario({precio: ''})
     listInventarios()
     setTimeout(() => {
       setLoadingSave(false)
@@ -102,6 +131,16 @@ const editInventario= async () => {
 
   return (
     <>
+     
+
+        <ModalAgregar
+          title={title}
+          closeModal={closeModal}
+          handleChange={handleChange}
+          modulo={inventario}
+          loadingSave={loadingSave}
+          save={saveInventario}
+        />
        
         <div className="form-check form-switch">
           <input 
@@ -168,7 +207,7 @@ const editInventario= async () => {
               </thead>
               <tbody>
                 {
-                  inventarios.map((inventario, index,populate) => {
+                  inventarios.map((inventario, index) => {
                     return (
                       <tr key={inventario._id}>
                         <th scope="row">{index + 1}</th>
@@ -178,11 +217,10 @@ const editInventario= async () => {
                         <td>{inventario.color}</td>
                         <td>{dayjs(inventario.fechaCompra).format('YYYY-MM-DD')}</td>
                         <td>{inventario.precio}</td>
-                        <td>{populate.usuario}</td>
-                        <td>{populate.marca}</td>
-                        <td>{populate.estado }</td>
-                        <td>{populate.tipoEquipo}</td>
-                       
+                        <td>{inventario.usuario.nombre}</td>
+                        <td>{inventario.marca.nombre}</td>
+                        <td>{inventario.estado.nombre }</td>
+                        <td>{inventario.tipoEquipo.nombre}</td>
                        
                         <td>{dayjs(inventario.fechaCreacion).format('YYYY-MM-DD')}</td>
                         <td>{dayjs(inventario.fechaActualizacion).format('YYYY-MM-DD')}</td>

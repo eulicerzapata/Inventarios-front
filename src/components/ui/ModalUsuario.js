@@ -86,7 +86,7 @@ export default function ModalUsuario({
               type="button" 
               className="btn btn-primary"
               onClick={save}
-              disabled={modulo.email.length === 0}
+              
               
             >
             Enviar

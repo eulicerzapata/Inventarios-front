@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { createTipoEquipo, getTipoEquipos, editarTipoEquipo } from '../services/TipoEquipoServices'
 import Modal from './ui/Modal'
 import ModalEdit from './ui/ModalEdit'
+import "../css/botones.css"
+import TablaCabecera from './ui/TablaCabecera'
+
 
 export default function TipoEquipos() {
 const title= 'Tipo de Equipo'
@@ -48,6 +51,7 @@ const handleChange = (e) => {
   setTipoEquipo({
     ...tipoEquipo,
     [e.target.name]: e.target.value
+    
   })
 }
 
@@ -117,16 +121,19 @@ const editTipoEquipo = async () => {
           loadingSave={loadingSave}
           save={saveTipoEquipo}
         />
-        <div className="form-check form-switch">
+        <container className="container-botones">
+        <div className="form-check form-switch input">
           <input 
-            className="form-check-input" 
+            className="form-check-input " 
             type="checkbox" 
             role="switch" 
             id="flexSwitchCheckChecked"
             checked={query}
             onChange={changeSwitch}
+            
           />
           <label 
+            
             className="form-check-label" 
             htmlFor="flexSwitchCheckChecked"
           >
@@ -135,13 +142,16 @@ const editTipoEquipo = async () => {
         </div>
         <button 
           type="button" 
-          className="btn btn-outline-primary"
+          
+          className="btn btn-outline-primary boton-agrgar "
           data-bs-toggle="modal" 
           data-bs-target="#exampleModal" 
           data-bs-whatever="@mdo"
         >
           Agregar
         </button>
+        </container>
+
         {
           error && 
           (
@@ -162,16 +172,7 @@ const editTipoEquipo = async () => {
             :
             (
               <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Fecha creac.</th>
-                  <th scope="col">Fecha act.</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
+              <TablaCabecera/>
               <tbody>
                 {
                   tipoEquipos.map((tipoEquipo, index) => {

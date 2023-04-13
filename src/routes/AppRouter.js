@@ -8,6 +8,7 @@ import Footer from '../components/ui/Footer'
 import NavBar from '../components/ui/NavBar'
 import NotFound from '../components/ui/NotFound'
 import Usuarios from '../components/Usuarios'
+import Inicio from '../components/Inicio'
 
 export default function AppRouter() {
   return (
@@ -16,7 +17,8 @@ export default function AppRouter() {
         <NavBar />
         <div className='container'>
             <Routes>
-                <Route path='/' element={<TipoEquipos/>} />
+                <Route path='/' element={<Inicio/>} />
+                <Route path='/tipoEquipos' element={<TipoEquipos/>} />
                 <Route path='/estados' element={<Estados />} />
                 <Route path='/usuarios' element={<Usuarios />} />
                 <Route path='/marcas' element={<Marcas/> } />

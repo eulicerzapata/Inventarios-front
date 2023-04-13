@@ -10,6 +10,7 @@ import ModalUsuario from "./ui/ModalUsuario";
 import ModalEUs from "./ui/ModalEUs";
 
 
+
 export default function Usuarios() {
   const title = "Tipo de Usuario";
   const [usuarios, setUsuarios] = useState([]);
@@ -79,8 +80,7 @@ export default function Usuarios() {
   };
 
   const closeModal = () => {
-    setUsuario({ nombre: "" });
-    setUsuario({ email: "" });
+    setUsuario({ nombre: "" , email: "" });
     if (id) setId("");
   };
 
@@ -129,28 +129,37 @@ export default function Usuarios() {
         loadingSave={loadingSave}
         save={saveusuario}
       />
-      <div className="form-check form-switch">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="flexSwitchCheckChecked"
-          checked={query}
-          onChange={changeSwitch}
-        />
-        <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-          Activos
-        </label>
-      </div>
-      <button
-        type="button"
-        className="btn btn-outline-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        data-bs-whatever="@mdo"
-      >
-        Agregar
-      </button>
+     <container className="container-botones">
+        <div className="form-check form-switch input">
+          <input 
+            className="form-check-input " 
+            type="checkbox" 
+            role="switch" 
+            id="flexSwitchCheckChecked"
+            checked={query}
+            onChange={changeSwitch}
+            
+          />
+          <label 
+            
+            className="form-check-label" 
+            htmlFor="flexSwitchCheckChecked"
+          >
+            Activos
+          </label>
+        </div>
+        <button 
+          type="button" 
+          
+          className="btn btn-outline-primary boton-agrgar "
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal" 
+          data-bs-whatever="@mdo"
+        >
+          Agregar
+        </button>
+        </container>
+
       {error && (
         <div className="alert alert-danger" role="alert">
           Ha ocurrido un error

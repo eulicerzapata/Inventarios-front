@@ -58,6 +58,21 @@ export default function ModalEditar({
             <div className="mb-3">
               <label htmlFor="recipient-name" 
               className="col-form-label">
+               descripción:
+              </label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="recipient-name"
+                name="descripcion"
+                onChange={handleChange}
+                value={modulo.descripcion}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="recipient-name" 
+              className="col-form-label">
               Foto:
               </label>
               <input 
@@ -81,7 +96,7 @@ export default function ModalEditar({
                 id="recipient-name"
                 name="color"
                 onChange={handleChange}
-                value={modulo.Color}
+                value={modulo.color}
               />
             </div>
 
@@ -115,6 +130,64 @@ export default function ModalEditar({
               />
             </div>
 
+            <div className="mb-3">
+              <label htmlFor="recipient-name" 
+              className="col-form-label">
+               Usuario:
+              </label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="recipient-name"
+                name="usuario"
+                onChange={handleChange}
+                value={modulo.usuario}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="recipient-name" 
+              className="col-form-label">
+                marca:
+              </label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="recipient-name"
+                name="marca"
+                onChange={handleChange}
+                value={modulo.marca}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="recipient-name" 
+              className="col-form-label">
+                Estado:
+              </label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="recipient-name"
+                name="estado"
+                onChange={handleChange}
+                value={modulo.estado}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="recipient-name" 
+              className="col-form-label">
+               tipoEquipo:
+              </label>
+              <input 
+                type="text" 
+                className="form-control" 
+                id="recipient-name"
+                name="tipoEquipo"
+                onChange={handleChange}
+                value={modulo.tipoEquipo}
+              />
+            </div>
             
           </form>
         </div>
@@ -149,7 +222,7 @@ export default function ModalEditar({
               type="button" 
               className="btn btn-primary"
               onClick={editar}
-              disabled={modulo.length === 0}
+              
             >
             Enviar
             </button>

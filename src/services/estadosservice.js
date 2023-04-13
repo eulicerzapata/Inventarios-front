@@ -17,7 +17,7 @@ const createEstados = (data={}) => {
 };
 
 const editarEstado  = (id,data) => {
-  return axiosConfig.put(`estado/${id}`,data, {
+  return axiosConfig.put(`estadoequipo/${id}`,data, {
       headers: {
         "Content-Type": "application/json",
       },

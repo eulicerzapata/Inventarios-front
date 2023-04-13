@@ -102,7 +102,7 @@ export default function ModalEUs({
               type="button" 
               className="btn btn-primary"
               onClick={editar}
-              disabled={modulo.email.length === 0}
+              
             >
             Enviar
             </button>

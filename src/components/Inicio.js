@@ -51,29 +51,29 @@ export default function Inicio() {
         <container className="container-inicio">
           {inventarios.map((inventario, index) => {
             return (
-              <div class="card">
-                <img src={inventario.foto} class="card-img-top img-thumbnail" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">descripción: {inventario.descripcion}</p>
+              <div className="card">
+                <img src={inventario.foto} className="card-img-top img-thumbnail" alt="..." />
+                <div className="card-body">
+                  <p className="card-text">descripción: {inventario.descripcion}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Serial: {inventario.serial}</li>
-                  <li class="list-group-item">Modelo: {inventario.modelo}</li>
-                  <li class="list-group-item">Color: {inventario.color}</li>
-                  <li class="list-group-item">
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">Serial: {inventario.serial}</li>
+                  <li className="list-group-item">Modelo: {inventario.modelo}</li>
+                  <li className="list-group-item">Color: {inventario.color}</li>
+                  <li className="list-group-item">
                     Fecha compra: {dayjs(inventario.fechaCompra).format("YYYY-MM-DD")}
                   </li>
-                  <li class="list-group-item">Precio: {inventario.precio}</li>
-                  <li class="list-group-item">
+                  <li className="list-group-item">Precio: {inventario.precio}</li>
+                  <li className="list-group-item">
                     Usuario: {inventario.usuario.nombre}
                   </li>
-                 <li class="list-group-item">
+                 <li className="list-group-item">
                     Marca: {inventario.marca.nombre}
                   </li>
-                  <li class="list-group-item">
+                  <li className="list-group-item">
                     Estado: {inventario.estado.nombre}
                   </li>
-                  <li class="list-group-item">
+                  <li className="list-group-item">
                     Tipo Equipo: {inventario.tipoEquipo.nombre}
                   </li>
                 </ul>

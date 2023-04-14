@@ -62,6 +62,20 @@ export default function ModalAgregar({
 
               <div className="mb-3">
                 <label htmlFor="recipient-name" className="col-form-label">
+                  descripción:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  name="describcion"
+                  onChange={handleChange}
+                  value={modulo.descripcion}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="recipient-name" className="col-form-label">
                   Foto:
                 </label>
                 <input
@@ -129,6 +143,9 @@ export default function ModalAgregar({
                   value={modulo.usuario}
                 />
               </div>
+
+              
+
 
               <div className="mb-3">
                 <label htmlFor="recipient-name" className="col-form-label">

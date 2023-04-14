@@ -240,6 +240,11 @@ export default function Inventarios() {
     }
   };
 
+
+  
+
+  
+
   return (
     <>
       <ModalAgregar

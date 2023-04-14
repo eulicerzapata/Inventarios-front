@@ -141,7 +141,7 @@ export default function ModalEditar({
                 id="recipient-name"
                 name="usuario"
                 onChange={handleChange}
-                value={modulo.usuario}
+                value={modulo.usuario.nombre}
               />
             </div>
 
@@ -156,7 +156,7 @@ export default function ModalEditar({
                 id="recipient-name"
                 name="marca"
                 onChange={handleChange}
-                value={modulo.marca}
+                value={modulo.marca.nombre}
               />
             </div>
             <div className="mb-3">
@@ -170,7 +170,7 @@ export default function ModalEditar({
                 id="recipient-name"
                 name="estado"
                 onChange={handleChange}
-                value={modulo.estado}
+                value={modulo.estado.nombre}
               />
             </div>
 
@@ -185,7 +185,7 @@ export default function ModalEditar({
                 id="recipient-name"
                 name="tipoEquipo"
                 onChange={handleChange}
-                value={modulo.tipoEquipo}
+                value={modulo.tipoEquipo.nombre}
               />
             </div>
             

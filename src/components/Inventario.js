@@ -8,6 +8,10 @@ import {
 import ModalAgregar from "./ui/modalesInventarios.js/ModalAgregar";
 
 import ModalEditar from "./ui/modalesInventarios.js/ModalEditar";
+import {getEstados} from "../services/estadosservice"
+import {getTipoEquipos} from "../services/TipoEquipoServices"
+import { getUsuarios} from "../services/UsusariosService"
+import {getMarca} from "../services/Marcasservices"
 
 export default function Inventarios() {
   const title = "Tipo de Inventarios";
@@ -19,8 +23,32 @@ export default function Inventarios() {
     serial: "",modelo:"",descripcion:"",foto:"",color:"",fechaCompra:"",precio:"",usuario:"" , marca:"",estado:"",tipoEquipo:"",
   });
   const [loadingSave, setLoadingSave] = useState(false);
+  const [modulos, setModulos]=useState(null);
 
   const [id, setId] = useState("");
+
+  const listarModulos = async() =>{
+    try {
+      const estados= await getEstados(query);
+      const tipos= await getTipoEquipos(query);
+      const marcas= await getMarca(query);
+      const usuarios= await getUsuarios(query);
+      console.log(estados.data)
+      console.log(tipos.data)
+      console.log(marcas.data)
+      console.log(usuarios.data)
+      const arregloModulos = { 
+        estados:estados.data,
+        tipos:tipos.data,
+        marcas:marcas.data,
+        usuarios:usuarios.data,
+       }
+       setModulos(arregloModulos)
+        console.log(modulos)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const listInventarios = async () => {
     try {
@@ -29,7 +57,7 @@ export default function Inventarios() {
       const { data } = await getInventarios(query);
       console.log(data);
       setInventarios(data);
-
+       
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -41,6 +69,7 @@ export default function Inventarios() {
   };
 
   useEffect(() => {
+    listarModulos()
     listInventarios();
   }, [query]);
 
@@ -60,7 +89,47 @@ export default function Inventarios() {
     try {
       setError(false);
       setLoadingSave(true);
-      const response = await createInventarios(inventario);
+      let idUsuario, idEstado, idTipoEquipo, idMarca;
+
+      modulos.usuarios.map(el=>{
+        if (inventario.usuario === el.nombre ) {
+          idUsuario=el._id
+        }
+      })
+
+      modulos.marcas.map(el=>{
+        if (inventario.marca === el.nombre ) {
+          idMarca=el._id
+        }
+      })
+
+      modulos.estados.map(el=>{
+        if (inventario.estado === el.nombre ) {
+          idEstado=el._id
+        }
+      })
+
+      modulos.tipos.map(el=>{
+        if (inventario.tipoEquipo === el.nombre ) {
+          idTipoEquipo=el._id
+        }
+      })
+      
+      const nuevoInventario ={
+        serial:inventario.serial,
+        modelo:inventario.modelo,
+        descripcion:inventario.descripcion,
+        foto:inventario.foto,
+        color:inventario.color,
+       fechaCompra:inventario.fechaCompra,
+       precio:inventario.precio,
+        usuario:idUsuario,
+        marca:idMarca,
+        estado:idEstado,
+        tipoEquipo:idTipoEquipo
+      }
+      console.log(nuevoInventario)
+      const response = await createInventarios(nuevoInventario);
       console.log(response);
       setInventario({ serial: "" });
       setInventario({ modelo: "" });
@@ -116,9 +185,50 @@ export default function Inventarios() {
     try {
       setError(false);
       setLoadingSave(true);
-      const response = await editarInventarios(id, inventario);
+      let idUsuario, idEstado, idTipoEquipo, idMarca;
+
+      modulos.usuarios.map(el=>{
+        if (inventario.usuario === el.nombre ) {
+          idUsuario=el._id
+        }
+      })
+
+      modulos.marcas.map(el=>{
+        if (inventario.marca === el.nombre ) {
+          idMarca=el._id
+        }
+      })
+
+      modulos.estados.map(el=>{
+        if (inventario.estado === el.nombre ) {
+          idEstado=el._id
+        }
+      })
+
+      modulos.tipos.map(el=>{
+        if (inventario.tipoEquipo === el.nombre ) {
+          idTipoEquipo=el._id
+        }
+      })
+      
+      const nuevoInventario ={
+        serial:inventario.serial,
+        modelo:inventario.modelo,
+        descripcion:inventario.descripcion,
+        foto:inventario.foto,
+        color:inventario.color,
+       fechaCompra:inventario.fechaCompra,
+       precio:inventario.precio,
+        usuario:idUsuario,
+        marca:idMarca,
+        estado:idEstado,
+        tipoEquipo:idTipoEquipo
+      }
+      const response = await editarInventarios(id, nuevoInventario);
       console.log(response);
-      setInventario({ serial: "" , modelo: "" ,descripcion:"" ,foto: "" , color: "", fechaCompra: "" ,precio: "" ,precio: "",usuario:"",marca:"",estado:"",tipoEquipo:"" });
+      
+      setInventario({ serial: "" , modelo: "" ,descripcion:"" ,foto: "" , color: "", fechaCompra: "" ,precio: "" ,usuario:"",marca:"",estado:"",tipoEquipo:"" });
+      
       listInventarios();
       setTimeout(() => {
         setLoadingSave(false);
@@ -139,6 +249,7 @@ export default function Inventarios() {
         modulo={inventario}
         loadingSave={loadingSave}
         save={saveInventario}
+        
       />
 
         <ModalEditar

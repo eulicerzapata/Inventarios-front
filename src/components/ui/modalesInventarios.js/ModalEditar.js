@@ -212,8 +212,10 @@ export default function ModalEditar({
                 className="spinner-grow spinner-grow-sm" 
                 role="status" 
                 aria-hidden="true"
+                
               >
               </span>
+
                 Guardando...
             </button>
             ) : 
@@ -221,9 +223,13 @@ export default function ModalEditar({
             <button 
               type="button" 
               className="btn btn-primary"
+
               onClick={editar}
+              closeModal
+             
               
             >
+              
             Enviar
             </button>
             )

@@ -73,6 +73,9 @@ export default function Inicio() {
                   <li class="list-group-item">
                     Estado: {inventario.estado.nombre}
                   </li>
+                  <li class="list-group-item">
+                    Tipo Equipo: {inventario.tipoEquipo.nombre}
+                  </li>
                 </ul>
               </div>
             );

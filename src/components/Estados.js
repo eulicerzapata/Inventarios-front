@@ -12,7 +12,7 @@ import TablaCabecera from "./ui/TablaCabecera";
 
 
 export default function Estados() {
-  const title = "Tipo de Estado";
+  const title = "Estados";
   const [estados, setEstados] = useState([]);
   const [query, setQuery] = useState(true);
   const [loading, setLoading] = useState(true);

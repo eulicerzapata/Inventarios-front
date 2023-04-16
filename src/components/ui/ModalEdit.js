@@ -13,7 +13,7 @@ export default function ModalEdit({
     <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
-          <h1 className="modal-title fs-5" id="exampleModalLabel">Nuevo {title}</h1>
+          <h1 className="modal-title fs-5" id="exampleModalLabel">Editar {title}</h1>
           <button 
             type="button" 
             className="btn-close" 

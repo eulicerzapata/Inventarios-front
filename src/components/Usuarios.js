@@ -12,7 +12,7 @@ import ModalEUs from "./ui/ModalEUs";
 
 
 export default function Usuarios() {
-  const title = "Tipo de Usuario";
+  const title = " Usuario";
   const [usuarios, setUsuarios] = useState([]);
   const [query, setQuery] = useState(true);
   const [loading, setLoading] = useState(true);

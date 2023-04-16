@@ -8,7 +8,7 @@ import TablaCabecera from './ui/TablaCabecera'
 
 
 export default function Marcas() {
-const title= 'Tipo de Marca'
+const title= 'Marca'
 const [marcas, setMarcas] = useState([])
 const [query, setQuery] = useState(true)
 const [loading, setLoading] = useState(true)

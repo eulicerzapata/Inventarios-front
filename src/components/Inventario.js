@@ -7,11 +7,11 @@ import {
 } from "../services/InventarioServices";
 import ModalAgregar from "./ui/modalesInventarios.js/ModalAgregar";
 
-import ModalEditar from "./ui/modalesInventarios.js/ModalEditar";
-import {getEstados} from "../services/estadosservice"
-import {getTipoEquipos} from "../services/TipoEquipoServices"
-import { getUsuarios} from "../services/UsusariosService"
-import {getMarca} from "../services/Marcasservices"
+
+import { getEstados } from "../services/estadosservice";
+import { getTipoEquipos } from "../services/TipoEquipoServices";
+import { getUsuarios } from "../services/UsusariosService";
+import { getMarca } from "../services/Marcasservices";
 
 export default function Inventarios() {
   const title = "Tipo de Inventarios";
@@ -20,35 +20,45 @@ export default function Inventarios() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [inventario, setInventario] = useState({
-    serial: "",modelo:"",descripcion:"",foto:"",color:"",fechaCompra:"",precio:"",usuario:"" , marca:"",estado:"",tipoEquipo:"",
+    serial: "",
+    modelo: "",
+    descripcion: "",
+    foto: "",
+    color: "",
+    fechaCompra: "",
+    precio: "",
+    usuario: "",
+    marca: "",
+    estado: "",
+    tipoEquipo: "",
   });
   const [loadingSave, setLoadingSave] = useState(false);
-  const [modulos, setModulos]=useState(null);
+  const [modulos, setModulos] = useState(null);
 
   const [id, setId] = useState("");
 
-  const listarModulos = async() =>{
+  const listarModulos = async () => {
     try {
-      const estados= await getEstados(query);
-      const tipos= await getTipoEquipos(query);
-      const marcas= await getMarca(query);
-      const usuarios= await getUsuarios(query);
-      console.log(estados.data)
-      console.log(tipos.data)
-      console.log(marcas.data)
-      console.log(usuarios.data)
-      const arregloModulos = { 
-        estados:estados.data,
-        tipos:tipos.data,
-        marcas:marcas.data,
-        usuarios:usuarios.data,
-       }
-       setModulos(arregloModulos)
-        console.log(modulos)
+      const estados = await getEstados(query);
+      const tipos = await getTipoEquipos(query);
+      const marcas = await getMarca(query);
+      const usuarios = await getUsuarios(query);
+      console.log(estados.data);
+      console.log(tipos.data);
+      console.log(marcas.data);
+      console.log(usuarios.data);
+      const arregloModulos = {
+        estados: estados.data,
+        tipos: tipos.data,
+        marcas: marcas.data,
+        usuarios: usuarios.data,
+      };
+      setModulos(arregloModulos);
+      console.log(modulos);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const listInventarios = async () => {
     try {
@@ -57,7 +67,7 @@ export default function Inventarios() {
       const { data } = await getInventarios(query);
       console.log(data);
       setInventarios(data);
-       
+
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -69,7 +79,7 @@ export default function Inventarios() {
   };
 
   useEffect(() => {
-    listarModulos()
+    listarModulos();
     listInventarios();
   }, [query]);
 
@@ -81,7 +91,6 @@ export default function Inventarios() {
     setInventario({
       ...inventario,
       [e.target.name]: e.target.value,
-      
     });
   };
 
@@ -91,44 +100,44 @@ export default function Inventarios() {
       setLoadingSave(true);
       let idUsuario, idEstado, idTipoEquipo, idMarca;
 
-      modulos.usuarios.map(el=>{
-        if (inventario.usuario === el.nombre ) {
-          idUsuario=el._id
+      modulos.usuarios.map((el) => {
+        if (inventario.usuario === el.nombre) {
+          idUsuario = el._id;
         }
-      })
+      });
 
-      modulos.marcas.map(el=>{
-        if (inventario.marca === el.nombre ) {
-          idMarca=el._id
+      modulos.marcas.map((el) => {
+        if (inventario.marca === el.nombre) {
+          idMarca = el._id;
         }
-      })
+      });
 
-      modulos.estados.map(el=>{
-        if (inventario.estado === el.nombre ) {
-          idEstado=el._id
+      modulos.estados.map((el) => {
+        if (inventario.estado === el.nombre) {
+          idEstado = el._id;
         }
-      })
+      });
 
-      modulos.tipos.map(el=>{
-        if (inventario.tipoEquipo === el.nombre ) {
-          idTipoEquipo=el._id
+      modulos.tipos.map((el) => {
+        if (inventario.tipoEquipo === el.nombre) {
+          idTipoEquipo = el._id;
         }
-      })
-      
-      const nuevoInventario ={
-        serial:inventario.serial,
-        modelo:inventario.modelo,
-        descripcion:inventario.descripcion,
-        foto:inventario.foto,
-        color:inventario.color,
-       fechaCompra:inventario.fechaCompra,
-       precio:inventario.precio,
-        usuario:idUsuario,
-        marca:idMarca,
-        estado:idEstado,
-        tipoEquipo:idTipoEquipo
-      }
-      console.log(nuevoInventario)
+      });
+
+      const nuevoInventario = {
+        serial: inventario.serial,
+        modelo: inventario.modelo,
+        descripcion: inventario.descripcion,
+        foto: inventario.foto,
+        color: inventario.color,
+        fechaCompra: inventario.fechaCompra,
+        precio: inventario.precio,
+        usuario: idUsuario,
+        marca: idMarca,
+        estado: idEstado,
+        tipoEquipo: idTipoEquipo,
+      };
+      console.log(nuevoInventario);
       const response = await createInventarios(nuevoInventario);
       console.log(response);
       setInventario({ serial: "" });
@@ -158,7 +167,7 @@ export default function Inventarios() {
     setInventario({
       serial: "",
       modelo: "",
-      descripcion:"",
+      descripcion: "",
       foto: "",
       color: "",
       fechaCompra: "",
@@ -187,48 +196,60 @@ export default function Inventarios() {
       setLoadingSave(true);
       let idUsuario, idEstado, idTipoEquipo, idMarca;
 
-      modulos.usuarios.map(el=>{
-        if (inventario.usuario === el.nombre ) {
-          idUsuario=el._id
+      modulos.usuarios.map((el) => {
+        if (inventario.usuario === el.nombre) {
+          idUsuario = el._id;
         }
-      })
+      });
 
-      modulos.marcas.map(el=>{
-        if (inventario.marca === el.nombre ) {
-          idMarca=el._id
+      modulos.marcas.map((el) => {
+        if (inventario.marca === el.nombre) {
+          idMarca = el._id;
         }
-      })
+      });
 
-      modulos.estados.map(el=>{
-        if (inventario.estado === el.nombre ) {
-          idEstado=el._id
+      modulos.estados.map((el) => {
+        if (inventario.estado === el.nombre) {
+          idEstado = el._id;
         }
-      })
+      });
 
-      modulos.tipos.map(el=>{
-        if (inventario.tipoEquipo === el.nombre ) {
-          idTipoEquipo=el._id
+      modulos.tipos.map((el) => {
+        if (inventario.tipoEquipo === el.nombre) {
+          idTipoEquipo = el._id;
         }
-      })
-      
-      const nuevoInventario ={
-        serial:inventario.serial,
-        modelo:inventario.modelo,
-        descripcion:inventario.descripcion,
-        foto:inventario.foto,
-        color:inventario.color,
-       fechaCompra:inventario.fechaCompra,
-       precio:inventario.precio,
-        usuario:idUsuario,
-        marca:idMarca,
-        estado:idEstado,
-        tipoEquipo:idTipoEquipo
-      }
+      });
+
+      const nuevoInventario = {
+        serial: inventario.serial,
+        modelo: inventario.modelo,
+        descripcion: inventario.descripcion,
+        foto: inventario.foto,
+        color: inventario.color,
+        fechaCompra: inventario.fechaCompra,
+        precio: inventario.precio,
+        usuario: idUsuario,
+        marca: idMarca,
+        estado: idEstado,
+        tipoEquipo: idTipoEquipo,
+      };
       const response = await editarInventarios(id, nuevoInventario);
       console.log(response);
-      
-      setInventario({ serial: "" , modelo: "" ,descripcion:"" ,foto: "" , color: "", fechaCompra: "" ,precio: "" ,usuario:"",marca:"",estado:"",tipoEquipo:"" });
-      
+
+      setInventario({
+        serial: "",
+        modelo: "",
+        descripcion: "",
+        foto: "",
+        color: "",
+        fechaCompra: "",
+        precio: "",
+        usuario: "",
+        marca: "",
+        estado: "",
+        tipoEquipo: "",
+      });
+
       listInventarios();
       setTimeout(() => {
         setLoadingSave(false);
@@ -240,11 +261,6 @@ export default function Inventarios() {
     }
   };
 
-
-  
-
-  
-
   return (
     <>
       <ModalAgregar
@@ -254,48 +270,272 @@ export default function Inventarios() {
         modulo={inventario}
         loadingSave={loadingSave}
         save={saveInventario}
-        
       />
 
-        <ModalEditar
-        title={title}
-        closeModal={closeModal}
-        handleChange={handleChange}
-        modulo={inventario}
-        loadingSave={loadingSave}
-       editar={editInventario}
-      />
+      <>
+        {inventarios.map((modul) => {
+          return (
+            <div
+              className="modal fade"
+              id="exampleModalEdit"
+              tabIndex={-1}
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">
+                      editar {title}
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                      onClick={closeModal}
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          serial:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="serial"
+                          onChange={handleChange}
+                          value={inventario.serial}
+                        />
+                      </div>
 
-<container className="container-botones">
-        <div className="form-check form-switch input">
-          <input 
-            className="form-check-input " 
-            type="checkbox" 
-            role="switch" 
-            id="flexSwitchCheckChecked"
-            checked={query}
-            onChange={changeSwitch}
-            
-          />
-          <label 
-            
-            className="form-check-label" 
-            htmlFor="flexSwitchCheckChecked"
-          >
-            Activos
-          </label>
-        </div>
-        <button 
-          type="button" 
-          
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Modelo:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="modelo"
+                          onChange={handleChange}
+                          value={inventario.modelo}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          descripción:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="descripcion"
+                          onChange={handleChange}
+                          value={inventario.descripcion}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Foto:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="foto"
+                          onChange={handleChange}
+                          value={inventario.foto}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Color:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="color"
+                          onChange={handleChange}
+                          value={inventario.color}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Fecha Compra:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="fechaCompra"
+                          onChange={handleChange}
+                          value={inventario.fechaCompra}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          precio:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="precio"
+                          onChange={handleChange}
+                          value={inventario.precio}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Usuario:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="usuario"
+                          onChange={handleChange}
+                          value={modul.usuario.nombre}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          marca:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="marca"
+                          onChange={handleChange}
+                          value={modul.marca.nombre}
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          Estado:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="estado"
+                          onChange={handleChange}
+                          value={modul.estado.nombre}
+                        />
+                      </div>
+
+                      <div className="mb-3">
+                        <label
+                          htmlFor="recipient-name"
+                          className="col-form-label"
+                        >
+                          tipoEquipo:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="recipient-name"
+                          name="tipoEquipo"
+                          onChange={handleChange}
+                          value={modul.tipoEquipo.nombre}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                      onClick={closeModal}
+                    >
+                      Cerrar
+                    </button>
+                    {loadingSave ? (
+                      <button
+                        className="btn btn-primary"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-grow spinner-grow-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Guardando...
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={editInventario}
+                        closeModal
+                      >
+                        Enviar
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </>
+
+      <container className="container-botones">
+        <button
+          type="button"
           className="btn btn-outline-primary boton-agrgar "
-          data-bs-toggle="modal" 
-          data-bs-target="#exampleModal" 
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
           data-bs-whatever="@mdo"
         >
           Agregar
         </button>
-        </container>
+      </container>
       {error && (
         <div className="alert alert-danger" role="alert">
           Ha ocurrido un error
@@ -356,16 +596,16 @@ export default function Inventarios() {
                       )}
                     </td>
                     <td>
-                    <button 
-                            onClick={selectInventario}
-                            type="button" 
-                            className="btn btn-success"
-                            data-bs-toggle="modal" 
-                            data-bs-target="#exampleModalEdit" 
-                            id={inventario._id}
-                          >
-                            Editar
-                            </button>
+                      <button
+                        onClick={selectInventario}
+                        type="button"
+                        className="btn btn-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalEdit"
+                        id={inventario._id}
+                      >
+                        Editar
+                      </button>
                     </td>
                   </tr>
                 );

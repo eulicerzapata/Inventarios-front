@@ -9,7 +9,7 @@ const getEstados = (estado) => {
 };
 
 const createEstados = (data={}) => {
-    return axiosConfig.post("nombre","email",data, {
+    return axiosConfig.post("estadoequipo",data, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -68,7 +68,7 @@ export default function ModalAgregar({
                   type="text"
                   className="form-control"
                   id="recipient-name"
-                  name="describcion"
+                  name="descripcion"
                   onChange={handleChange}
                   value={modulo.descripcion}
                 />

@@ -144,9 +144,6 @@ export default function ModalAgregar({
                 />
               </div>
 
-              
-
-
               <div className="mb-3">
                 <label htmlFor="recipient-name" className="col-form-label">
                   Marca:

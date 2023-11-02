@@ -10,7 +10,6 @@ import ModalEdit from "./ui/ModalEdit";
 
 import TablaCabecera from "./ui/TablaCabecera";
 
-
 export default function Estados() {
   const title = "Estados";
   const [estados, setEstados] = useState([]);
@@ -125,34 +124,28 @@ export default function Estados() {
       />
       <container className="container-botones">
         <div className="form-check form-switch input">
-          <input 
-            className="form-check-input " 
-            type="checkbox" 
-            role="switch" 
+          <input
+            className="form-check-input "
+            type="checkbox"
+            role="switch"
             id="flexSwitchCheckChecked"
             checked={query}
             onChange={changeSwitch}
-            
           />
-          <label 
-            
-            className="form-check-label" 
-            htmlFor="flexSwitchCheckChecked"
-          >
+          <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
             Activos
           </label>
         </div>
-        <button 
-          type="button" 
-          
+        <button
+          type="button"
           className="btn btn-outline-primary boton-agrgar "
-          data-bs-toggle="modal" 
-          data-bs-target="#exampleModal" 
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
           data-bs-whatever="@mdo"
         >
           Agregar
         </button>
-        </container>
+      </container>
       {error && (
         <div className="alert alert-danger" role="alert">
           Ha ocurrido un error
@@ -179,16 +172,16 @@ export default function Estados() {
                       {dayjs(estado.fechaActualizacion).format("YYYY-MM-DD")}
                     </td>
                     <td>
-                    <button 
-                            onClick={selectEstado}
-                            type="button" 
-                            className="btn btn-success"
-                            data-bs-toggle="modal" 
-                            data-bs-target="#exampleModalEdit" 
-                            id={estado._id}
-                          >
-                            Editar
-                            </button>
+                      <button
+                        onClick={selectEstado}
+                        type="button"
+                        className="btn btn-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalEdit"
+                        id={estado._id}
+                      >
+                        Editar
+                      </button>
                     </td>
                   </tr>
                 );
